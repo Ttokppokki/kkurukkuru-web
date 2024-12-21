@@ -27,7 +27,7 @@ const Callback = () => {
 
       try {
         const { data } = await axios.post<AuthResponse>(
-          "http://localhost:8080/auth/login",
+          "https://36cd-211-36-142-196.ngrok-free.app/auth/login",
           { code }
         );
 
