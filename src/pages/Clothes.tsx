@@ -5,27 +5,24 @@ import Shadow from "../../public/Shadow";
 import Left from "../../public/Left";
 import Right from "../../public/Right";
 
-const FaceSelection = () => {
-    const faces = [
-        "/face/angry.png",
-        "/face/default.png",
-        "/face/fun.png",
-        "/face/happy.png",
-        "/face/heart.png",
-        "/face/sleep.png",
-        "/face/want.png",
-        "/face/zz.png",
+const ClothesSelection = () => {
+    const clothes = [
+        "/clothes/princess.png",
+        "/clothes/northface.png",
+        "/clothes/santa.png",
+        "/clothes/appjam.png",
+        "/clothes/fleece.png",
     ];
 
     const [currentPage, setCurrentPage] = useState(0);
-    const [selectedFace, setSelectedFace] = useState<string | null>(null);
+    const [selectedclothe, setSelectedclothe] = useState<string | null>(null);
 
-    const facesPerPage = 3;
-    const totalPages = Math.ceil(faces.length / facesPerPage);
+    const ClothesPerPage = 1;
+    const totalPages = Math.ceil(clothes.length / ClothesPerPage);
 
-    const currentFaces = faces.slice(
-        currentPage * facesPerPage,
-        currentPage * facesPerPage + facesPerPage
+    const currentClothes = clothes.slice(
+        currentPage * ClothesPerPage,
+        currentPage * ClothesPerPage + ClothesPerPage
     );
 
     const handlePrev = () => {
@@ -44,8 +41,8 @@ const FaceSelection = () => {
         }
     };
 
-    const handleFaceSelect = (face: string) => {
-        setSelectedFace(face);
+    const handleClotheselect = (clothe: string) => {
+        setSelectedclothe(clothe);
     };
 
     return (
@@ -53,7 +50,7 @@ const FaceSelection = () => {
             <Header />
             <div className="relative flex-1 flex flex-col items-center bg-white">
                 <span className="text-black text-xl font-bold text-center mt-[40px]">
-                    루돌프의 얼굴을 선택해 주세요!
+                    루돌프에게 귀여운 옷을 입혀주세요!
                 </span>
 
                 <div className="relative flex flex-col items-center mt-[80px]">
@@ -63,11 +60,11 @@ const FaceSelection = () => {
                             alt="Character"
                             className="object-contain w-[265px]"
                         />
-                        {selectedFace && (
+                        {selectedclothe && (
                             <img
-                                src={selectedFace}
-                                alt="Selected Face"
-                                className="absolute bottom-[125px] left-[140px] transform -translate-x-1/2 w-[100px] object-contain"
+                                src={selectedclothe}
+                                alt="Selected clothe"
+                                className="absolute bottom-[40px] right-[52px] w-[145px] object-contain"
                             />
                         )}
                     </div>
@@ -81,7 +78,6 @@ const FaceSelection = () => {
                     </div>
                 </div>
 
-                {/* 얼굴 선택 */}
                 <div className="z-30 flex items-center justify-center mt-[40px] gap-4">
                     <button
                         onClick={handlePrev}
@@ -90,17 +86,16 @@ const FaceSelection = () => {
                         <Left />
                     </button>
                     <div className="flex gap-5">
-                        {currentFaces.map((face, index) => (
+                        {currentClothes.map((clothe, index) => (
                             <div
                                 key={index}
-                                className="relative w-14 h-14 flex items-center justify-center"
-                                onClick={() => handleFaceSelect(face)}
+                                className="relative w-40 h-40 flex items-center justify-center"
+                                onClick={() => handleClotheselect(clothe)}
                             >
-                                <div className="absolute w-14 h-14 bg-[#d9d9d9] blur-[10px] rounded-full" />
                                 <div
-                                    className="absolute w-14 h-14 rounded-full flex items-center justify-center"
+                                    className="absolute w-40 h-40 rounded-full flex items-center justify-center"
                                     style={{
-                                        backgroundImage: `url(${face})`,
+                                        backgroundImage: `url(${clothe})`,
                                         backgroundSize: "contain",
                                         backgroundRepeat: "no-repeat",
                                         backgroundPosition: "center",
@@ -138,4 +133,4 @@ const FaceSelection = () => {
     );
 };
 
-export default FaceSelection;
+export default ClothesSelection;

@@ -5,6 +5,7 @@ import Main from "../pages/Main";
 import Letter from "../pages/Letter";
 import Nickname from "../pages/Nickname";
 import Face from '../pages/Face'
+import Clothes from '../pages/Clothes'
 
 export const router = createBrowserRouter([
   {
@@ -30,5 +31,9 @@ export const router = createBrowserRouter([
   {
     path: "/face",
     element: <Face />,
+  },
+  {
+    path: "/clothes",
+    element: <Clothes />,
   },
 ]);
