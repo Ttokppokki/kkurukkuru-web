@@ -102,6 +102,20 @@ const ItemsSelection = () => {
                                 }}
                             />
                         ))}
+                        {selectedFace && (
+                            <img
+                                src={selectedFace}
+                                alt="Selected Face"
+                                className="absolute bottom-[125px] left-[140px] transform -translate-x-1/2 w-[100px] object-contain"
+                            />
+                        )}
+                        {selectedClothe && (
+                            <img
+                                src={selectedClothe}
+                                alt="Selected Clothe"
+                                className="absolute bottom-[40px] right-[52px] w-[145px] object-contain"
+                            />
+                        )}
                     </div>
                     <div
                         className="absolute z-10"

@@ -34,9 +34,9 @@ const ClothesSelection = () => {
         setSelectedClothe(clothe);
     };
 
-    const handleNext = () => {
+    const handleConfirm = () => {
         if (selectedClothe) {
-            navigate("/items", { state: { selectedFace, selectedClothe } });
+            navigate("/items", { state: { selectedFace, selectedClothe } }); // 선택한 옷을 다음 페이지로 전달
         } else {
             alert("옷을 선택해 주세요!");
         }
@@ -64,6 +64,13 @@ const ClothesSelection = () => {
                                 src={selectedClothe}
                                 alt="Selected Clothe"
                                 className="absolute bottom-[40px] right-[52px] w-[145px] object-contain"
+                            />
+                        )}
+                        {selectedFace && (
+                            <img
+                                src={selectedFace}
+                                alt="Selected Face"
+                                className="absolute bottom-[125px] left-[140px] transform -translate-x-1/2 w-[100px] object-contain"
                             />
                         )}
                     </div>
@@ -105,7 +112,7 @@ const ClothesSelection = () => {
                             if (currentPage < clothes.length - 1) {
                                 setCurrentPage(currentPage + 1);
                             } else {
-                                handleNext();
+                                handleConfirm();
                             }
                         }}
                         className="w-12 h-12 flex items-center justify-center bg-[#c6a98c] rounded-full"
@@ -132,7 +139,7 @@ const ClothesSelection = () => {
                 <Button
                     text="다음"
                     isEnabled={!!selectedClothe}
-                    onClick={handleNext}
+                    onClick={handleConfirm}
                 />
             </div>
         </div>
