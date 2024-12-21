@@ -11,7 +11,7 @@ const Button: React.FC<ButtonProps> = ({ text, isEnabled }) => {
       className={`w-full h-[50px] flex items-center justify-center rounded-lg font-bold text-[15px] ${
         isEnabled
           ? "bg-[#f6a1a1] text-white"
-          : "bg-[#d9d9d9] text-gray-500"
+          : "bg-[#d9d9d9] text-white"
       }`}
     >
       {text}

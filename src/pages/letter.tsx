@@ -1,11 +1,12 @@
 import React from "react";
 import Header from "../components/Header";
+import Button from "../components/Button";
 
 const Letter = () => {
     return (
-        <>
+        <div className="overflow-hidden flex h-screen flex-col">
             <Header />
-            <div className="p-6 flex h-screen flex-col bg-white">
+            <div className="p-6 bg-white">
                 <div className="mt-5">
                     <span className="text-[#1a4614] text-xl font-bold">
                         000
@@ -24,9 +25,10 @@ const Letter = () => {
                         placeholder="답변을 작성해주세요!"
                         className="mt-4 w-full h-[340px] p-4 rounded-lg resize-none bg-white text-gray-700 placeholder-[#d9d9d9] focus:outline-none "
                     ></textarea>
+                    <Button text="작성완료" isEnabled={false} />
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
