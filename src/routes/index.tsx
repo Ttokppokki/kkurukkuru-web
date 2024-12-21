@@ -2,8 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Callback from "../pages/Callback";
 import Login from "../pages/Login";
 import Main from "../pages/Main";
-import Letter from "../pages/letter";
+import Letter from "../pages/Letter";
 import Nickname from "../pages/Nickname";
+import Face from '../pages/Face'
 
 export const router = createBrowserRouter([
   {
@@ -25,5 +26,9 @@ export const router = createBrowserRouter([
   {
     path: "/nickname",
     element: <Nickname />,
+  },
+  {
+    path: "/face",
+    element: <Face />,
   },
 ]);

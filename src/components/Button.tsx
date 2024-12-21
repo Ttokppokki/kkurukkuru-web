@@ -5,13 +5,13 @@ interface ButtonProps {
   isEnabled: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ text, isEnabled }) => {
+const Button = ({ text, isEnabled }: ButtonProps) => {
   return (
     <div
       className={`w-full h-[50px] flex items-center justify-center rounded-lg font-bold text-[15px] ${
         isEnabled
-          ? "bg-[#f6a1a1] text-white"
-          : "bg-[#d9d9d9] text-white"
+          ? "bg-[#f6a1a1] text-white" 
+          : "bg-[#d9d9d9] text-white" 
       }`}
     >
       {text}
