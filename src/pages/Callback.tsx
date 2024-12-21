@@ -1,35 +1,47 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useTokenStore } from "../stores/token";
+import toast from "react-hot-toast";
+
+interface AuthResponse {
+  accessToken: string;
+  refreshToken: string;
+}
 
 const Callback = () => {
   const navigate = useNavigate();
+  const { setAccessToken, setRefreshToken } = useTokenStore();
 
   useEffect(() => {
     const handleCallback = async () => {
-      const code = new URL(window.location.href).searchParams.get("code");
+      const searchParams = new URL(window.location.href).searchParams;
+      const code = searchParams.get("code");
 
-      if (code) {
-        try {
-          const response = await axios.post(
-            "http://localhost:8080/auth/login",
-            { code },
-            { withCredentials: true }
-          );
+      if (!code) {
+        toast.error("코드를 찾을 수 없습니다. 다시 시도해주세요.");
 
-          if (response.data.accessToken) {
-            localStorage.setItem("accessToken", response.data.accessToken);
-            navigate("/");
-          }
-        } catch (error) {
-          console.error("Login failed:", error);
-          navigate("/login");
-        }
+        navigate("/login");
+        return;
+      }
+
+      try {
+        const { data } = await axios.post<AuthResponse>(
+          "https://36cd-211-36-142-196.ngrok-free.app/auth/login",
+          { code }
+        );
+
+        setAccessToken(data.accessToken);
+        setRefreshToken(data.refreshToken);
+
+        navigate("/");
+      } catch {
+        navigate("/login");
       }
     };
 
     handleCallback();
-  }, [navigate]);
+  }, [navigate, setAccessToken, setRefreshToken]);
 
   return (
     <div className="min-h-screen flex items-center justify-center">

@@ -3,6 +3,7 @@ import Callback from "../pages/Callback";
 import Login from "../pages/Login";
 import Main from "../pages/Main";
 import Letter from "../pages/letter";
+import Nickname from "../pages/Nickname";
 
 export const router = createBrowserRouter([
   {
@@ -20,5 +21,9 @@ export const router = createBrowserRouter([
   {
     path: "/letter",
     element: <Letter />,
+  },
+  {
+    path: "/nickname",
+    element: <Nickname />,
   },
 ]);
