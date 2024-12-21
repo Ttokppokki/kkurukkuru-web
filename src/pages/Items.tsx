@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import Shadow from "../../public/Shadow";
+import Left from "../../public/Left";
+import Right from "../../public/Right";
 
 const ItemsSelection = () => {
     const items = [
@@ -9,13 +11,13 @@ const ItemsSelection = () => {
         { src: "/Items/Grasses.png", x: 48, y: 98, width: 180 },
         { src: "/Items/HeartItem.png", x: 230, y: 30, width: 60 },
         { src: "/Items/King.png", x: 88, y: 50, width: 100 },
-        { src: "/Items/Muffler.png", x: 140, y: 300, width: 80 },
-        { src: "/Items/Pool.png", x: 90, y: 220, width: 90 },
-        { src: "/Items/Ribbon.png", x: 100, y: 100, width: 50 },
-        { src: "/Items/Snowman.png", x: 200, y: 250, width: 70 },
-        { src: "/Items/Solo.png", x: 130, y: 180, width: 80 },
-        { src: "/Items/Stupid.png", x: 150, y: 300, width: 60 },
-        { src: "/Items/Sweat.png", x: 110, y: 270, width: 55 },
+        { src: "/Items/Muffler.png", x: 77, y: 170, width: 140 },
+        { src: "/Items/Pool.png", x: -15, y: 180, width: 90 },
+        { src: "/Items/Ribbon.png", x: 140, y: 40, width: 100 },
+        { src: "/Items/Snowman.png", x: 200, y: 180, width: 105 },
+        { src: "/Items/Sweat.png", x:25, y: 100, width: 65 },
+        { src: "/Items/Solo.png", x: -10, y: -35, width: 160 },
+        { src: "/Items/Stupid.png", x: -30, y: 120, width: 100 },
     ];
 
     const [selectedItems, setSelectedItems] = useState<
@@ -30,10 +32,8 @@ const ItemsSelection = () => {
         setSelectedItems((prev) => {
             const alreadySelected = prev.find((selected) => selected.src === item.src);
             if (alreadySelected) {
-                // 이미 선택된 아이템이면 취소
                 return prev.filter((selected) => selected.src !== item.src);
             }
-            // 새로 선택된 아이템 추가
             return [...prev, item];
         });
     };
@@ -61,7 +61,6 @@ const ItemsSelection = () => {
                     루돌프의 얼굴을 꾸며 주세요!
                 </span>
 
-                {/* 루돌프 영역 */}
                 <div className="relative flex flex-col items-center mt-[80px]">
                     <div className="relative z-20">
                         <img
@@ -69,7 +68,6 @@ const ItemsSelection = () => {
                             alt="Rudolph"
                             className="object-contain w-[265px]"
                         />
-                        {/* 선택된 아이템 표시 */}
                         {selectedItems.map((item, index) => (
                             <img
                                 key={index}
@@ -96,11 +94,11 @@ const ItemsSelection = () => {
 
                 {/* 아이템 선택 */}
                 <div className="z-30 flex items-center justify-center mt-[40px] gap-4">
-                    <button
+                <button
                         onClick={handlePrevPage}
-                        className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center"
+                        className="w-12 h-12 flex items-center justify-center bg-[#c6a98c] rounded-full"
                     >
-                        {"<"}
+                        <Left />
                     </button>
                     <div className="flex gap-5">
                         {currentItems.map((item, index) => (
@@ -124,9 +122,9 @@ const ItemsSelection = () => {
                     </div>
                     <button
                         onClick={handleNextPage}
-                        className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center"
+                        className="w-12 h-12 flex items-center justify-center bg-[#c6a98c] rounded-full"
                     >
-                        {">"}
+                        <Right />
                     </button>
                 </div>
 
