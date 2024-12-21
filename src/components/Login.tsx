@@ -1,30 +1,91 @@
-import { SiKakaotalk } from "react-icons/si";
+import { RiKakaoTalkFill } from "react-icons/ri";
 
-const Login = ({ onLogin }: { onLogin: () => void }) => {
+const Login = () => {
+  const KAKAO_CLIENT_ID = "840a2bdb9d990844770a7bca682d1f59";
+  const REDIRECT_URI = "http://localhost:5173/callback";
+
+  const handleKakaoLogin = async () => {
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    window.location.href = kakaoAuthUrl;
+  };
+
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6">
-      <div className="w-full max-w-sm space-y-8">
-        <div className="text-center space-y-4">
-          <div className="inline-block p-4 bg-blue-50 rounded-2xl mb-2">
-            <div className="text-5xl font-black tracking-tight">
-              <span className="text-blue-500">꾸우</span>
-              <span className="text-violet-500">꾸우</span>
+    <div className="flex flex-col min-h-screen bg-white relative overflow-x-hidden">
+      <div className="w-full z-10">
+        <div className="w-full pt-10 px-6 flex flex-col items-center">
+          <h1 className="text-[30px] font-bold leading-none tracking-tight mb-2">
+            <span className="text-[#940000] mr-[1px] text-4xl">꾸</span>
+            <span className="text-[#0B4619] mr-[1px] text-4xl">루</span>
+            <span className="text-[#940000] mr-[1px] text-4xl">꾸</span>
+            <span className="text-[#0B4619] text-4xl">루</span>
+          </h1>
+          <p className="text-xl text-[#666666] font-normal tracking-tight">
+            크리스마스, 친구에게 나만의 루돌프를
+          </p>
+        </div>
+      </div>
+
+      <div className="relative flex-1 flex flex-col">
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <div className="absolute bottom-0 w-full h-[62%] bg-[#1A4D2E]">
+            <div
+              className="absolute -top-[50px] left-1/2 -translate-x-1/2 w-[150%] h-[100px]"
+              style={{
+                background: "#1A4D2E",
+                borderTopLeftRadius: "50% 100%",
+                borderTopRightRadius: "50% 100%",
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="relative flex-1 flex justify-center items-center">
+          <div className="relative w-[300px] h-[300px] -mt-6">
+            <div className="absolute inset-0 rounded-full overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.1)]">
+              <img
+                src="login.png"
+                alt="Character"
+                className="w-full h-full object-cover bg-white"
+              />
+            </div>
+
+            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[300px]">
+              <div
+                className="absolute top-0 left-1/2 -translate-x-1/2 w-[220px] h-12"
+                style={{
+                  background:
+                    "radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 70%)",
+                }}
+              />
+              <div
+                className="absolute top-2 left-1/2 -translate-x-1/2 w-[280px] h-16"
+                style={{
+                  background:
+                    "radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0) 80%)",
+                }}
+              />
             </div>
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="relative z-10 px-6 mb-10">
           <button
-            onClick={onLogin}
-            className="w-full bg-[#FEE500] text-[#191919] font-medium h-14 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex items-center justify-center gap-2"
+            onClick={handleKakaoLogin}
+            className="relative w-full bg-[#FEE500] h-[54px] rounded-[14px] shadow-[0_2px_8px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-shadow duration-200"
           >
-            <SiKakaotalk className="text-xl" />
-            <span>카카오로 시작하기</span>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="absolute left-4">
+                <RiKakaoTalkFill className="text-[#191919] text-[24px]" />
+              </div>
+              <span className="text-[#191919] text-[18px] font-medium">
+                카카오로 시작하기
+              </span>
+            </div>
           </button>
+        </div>
 
-          <p className="text-center text-sm text-gray-500">
-            로그인하고 더 많은 기능을 사용해보세요!
-          </p>
+        <div className="relative z-10 h-[34px] flex justify-center">
+          <div className="w-[134px] h-1 bg-black rounded-full opacity-30" />
         </div>
       </div>
     </div>
