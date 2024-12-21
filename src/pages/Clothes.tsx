@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import Shadow from "../../public/Shadow";
@@ -6,6 +7,10 @@ import Left from "../../public/Left";
 import Right from "../../public/Right";
 
 const ClothesSelection = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { selectedFace } = location.state || {}; // 이전 페이지에서 선택한 얼굴 가져오기
+
     const clothes = [
         "/clothes/princess.png",
         "/clothes/northface.png",
@@ -15,35 +20,29 @@ const ClothesSelection = () => {
     ];
 
     const [currentPage, setCurrentPage] = useState(0);
-    const [selectedclothe, setSelectedclothe] = useState<string | null>(null);
-
-    const ClothesPerPage = 1;
-    const totalPages = Math.ceil(clothes.length / ClothesPerPage);
-
-    const currentClothes = clothes.slice(
-        currentPage * ClothesPerPage,
-        currentPage * ClothesPerPage + ClothesPerPage
-    );
+    const [selectedClothe, setSelectedClothe] = useState<string | null>(null);
 
     const handlePrev = () => {
         if (currentPage > 0) {
             setCurrentPage(currentPage - 1);
         } else {
-            setCurrentPage(totalPages - 1);
+            setCurrentPage(clothes.length - 1); // 마지막 페이지로 이동
         }
+    };
+
+    const handleClotheSelect = (clothe: string) => {
+        setSelectedClothe(clothe);
     };
 
     const handleNext = () => {
-        if (currentPage < totalPages - 1) {
-            setCurrentPage(currentPage + 1);
+        if (selectedClothe) {
+            navigate("/items", { state: { selectedFace, selectedClothe } });
         } else {
-            setCurrentPage(0);
+            alert("옷을 선택해 주세요!");
         }
     };
 
-    const handleClotheselect = (clothe: string) => {
-        setSelectedclothe(clothe);
-    };
+    const currentClothes = clothes[currentPage];
 
     return (
         <div className="overflow-hidden flex h-screen flex-col">
@@ -60,10 +59,10 @@ const ClothesSelection = () => {
                             alt="Character"
                             className="object-contain w-[265px]"
                         />
-                        {selectedclothe && (
+                        {selectedClothe && (
                             <img
-                                src={selectedclothe}
-                                alt="Selected clothe"
+                                src={selectedClothe}
+                                alt="Selected Clothe"
                                 className="absolute bottom-[40px] right-[52px] w-[145px] object-contain"
                             />
                         )}
@@ -78,7 +77,7 @@ const ClothesSelection = () => {
                     </div>
                 </div>
 
-                <div className="z-30 flex items-center justify-center mt-[30px] gap-4">
+                <div className="z-30 flex items-center justify-center -mt-[30px] gap-4">
                     <button
                         onClick={handlePrev}
                         className="w-12 h-12 flex items-center justify-center bg-[#c6a98c] rounded-full"
@@ -86,26 +85,29 @@ const ClothesSelection = () => {
                         <Left />
                     </button>
                     <div className="flex gap-5">
-                        {currentClothes.map((clothe, index) => (
+                        <div
+                            className="relative w-40 h-40 flex items-center justify-center cursor-pointer"
+                            onClick={() => handleClotheSelect(currentClothes)}
+                        >
                             <div
-                                key={index}
-                                className="relative w-40 h-40 flex items-center justify-center"
-                                onClick={() => handleClotheselect(clothe)}
-                            >
-                                <div
-                                    className="absolute w-40 h-40 rounded-full flex items-center justify-center"
-                                    style={{
-                                        backgroundImage: `url(${clothe})`,
-                                        backgroundSize: "contain",
-                                        backgroundRepeat: "no-repeat",
-                                        backgroundPosition: "center",
-                                    }}
-                                />
-                            </div>
-                        ))}
+                                className="absolute w-40 h-40 rounded-full flex items-center justify-center"
+                                style={{
+                                    backgroundImage: `url(${currentClothes})`,
+                                    backgroundSize: "contain",
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundPosition: "center",
+                                }}
+                            />
+                        </div>
                     </div>
                     <button
-                        onClick={handleNext}
+                        onClick={() => {
+                            if (currentPage < clothes.length - 1) {
+                                setCurrentPage(currentPage + 1);
+                            } else {
+                                handleNext();
+                            }
+                        }}
                         className="w-12 h-12 flex items-center justify-center bg-[#c6a98c] rounded-full"
                     >
                         <Right />
@@ -127,7 +129,11 @@ const ClothesSelection = () => {
                 </div>
             </div>
             <div className="fixed bottom-40 left-1/2 transform -translate-x-1/2 w-[80%]">
-                <Button text="다음" isEnabled />
+                <Button
+                    text="다음"
+                    isEnabled={!!selectedClothe}
+                    onClick={handleNext}
+                />
             </div>
         </div>
     );
