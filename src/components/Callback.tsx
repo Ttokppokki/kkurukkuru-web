@@ -19,11 +19,11 @@ const Callback = () => {
 
           if (response.data.accessToken) {
             localStorage.setItem("accessToken", response.data.accessToken);
-            navigate("/");
+            navigate("/app-flow.step=Main");
           }
         } catch (error) {
           console.error("Login failed:", error);
-          navigate("/login");
+          navigate("/");
         }
       }
     };
