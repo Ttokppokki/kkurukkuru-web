@@ -53,7 +53,7 @@ const ClothesSelection = () => {
                     루돌프에게 귀여운 옷을 입혀주세요!
                 </span>
 
-                <div className="relative flex flex-col items-center mt-[80px]">
+                <div className="relative flex flex-col items-center mt-[50px]">
                     <div className="relative z-20">
                         <img
                             src="none.png"
@@ -78,7 +78,7 @@ const ClothesSelection = () => {
                     </div>
                 </div>
 
-                <div className="z-30 flex items-center justify-center mt-[40px] gap-4">
+                <div className="z-30 flex items-center justify-center mt-[30px] gap-4">
                     <button
                         onClick={handlePrev}
                         className="w-12 h-12 flex items-center justify-center bg-[#c6a98c] rounded-full"
@@ -126,7 +126,7 @@ const ClothesSelection = () => {
                     </div>
                 </div>
             </div>
-            <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 w-[80%]">
+            <div className="fixed bottom-40 left-1/2 transform -translate-x-1/2 w-[80%]">
                 <Button text="다음" isEnabled />
             </div>
         </div>

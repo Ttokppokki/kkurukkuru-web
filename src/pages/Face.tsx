@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import Shadow from "../../public/Shadow";
@@ -6,6 +7,7 @@ import Left from "../../public/Left";
 import Right from "../../public/Right";
 
 const FaceSelection = () => {
+    const navigate = useNavigate();
     const faces = [
         "/face/angry.png",
         "/face/default.png",
@@ -36,16 +38,16 @@ const FaceSelection = () => {
         }
     };
 
-    const handleNext = () => {
-        if (currentPage < totalPages - 1) {
-            setCurrentPage(currentPage + 1);
-        } else {
-            setCurrentPage(0);
-        }
-    };
-
     const handleFaceSelect = (face: string) => {
         setSelectedFace(face);
+    };
+
+    const handleNext = () => {
+        if (selectedFace) {
+            navigate("/clothes", { state: { selectedFace } });
+        } else {
+            alert("얼굴을 선택해 주세요!");
+        }
     };
 
     return (
@@ -56,7 +58,7 @@ const FaceSelection = () => {
                     루돌프의 얼굴을 선택해 주세요!
                 </span>
 
-                <div className="relative flex flex-col items-center mt-[80px]">
+                <div className="relative flex flex-col items-center mt-[50px] ">
                     <div className="relative z-20">
                         <img
                             src="none.png"
@@ -82,7 +84,7 @@ const FaceSelection = () => {
                 </div>
 
                 {/* 얼굴 선택 */}
-                <div className="z-30 flex items-center justify-center mt-[40px] gap-4">
+                <div className="z-30 flex items-center justify-center mt-[30px] gap-4">
                     <button
                         onClick={handlePrev}
                         className="w-12 h-12 flex items-center justify-center bg-[#c6a98c] rounded-full"
@@ -110,7 +112,7 @@ const FaceSelection = () => {
                         ))}
                     </div>
                     <button
-                        onClick={handleNext}
+                        onClick={handlePrev}
                         className="w-12 h-12 flex items-center justify-center bg-[#c6a98c] rounded-full"
                     >
                         <Right />
@@ -130,9 +132,13 @@ const FaceSelection = () => {
                         />
                     </div>
                 </div>
+            <div className="fixed bottom-40 left-1/2 transform -translate-x-1/2 w-[80%]">
+                <Button
+                    text="다음"
+                    isEnabled={!!selectedFace}
+                    onClick={handleNext}
+                />
             </div>
-            <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 w-[80%]">
-                <Button text="다음" isEnabled />
             </div>
         </div>
     );
