@@ -1,6 +1,9 @@
+import { useEffect } from "react";
 import { RiKakaoTalkFill } from "react-icons/ri";
+import { useTokenStore } from "../stores/token";
 
 const Login = () => {
+  const clearTokens = useTokenStore((state) => state.clearTokens);
   const KAKAO_CLIENT_ID = "840a2bdb9d990844770a7bca682d1f59";
   const REDIRECT_URI = "http://localhost:5173/callback";
 
@@ -8,6 +11,10 @@ const Login = () => {
     const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
     window.location.href = kakaoAuthUrl;
   };
+
+  useEffect(() => {
+    clearTokens();
+  }, [clearTokens]);
 
   return (
     <div className="flex flex-col min-h-screen bg-white relative overflow-x-hidden">
@@ -40,25 +47,25 @@ const Login = () => {
         </div>
 
         <div className="relative flex-1 flex justify-center items-center">
-          <div className="relative w-[300px] h-[300px] -mt-6">
-            <div className="absolute inset-0 rounded-full overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.1)]">
+          <div className="relative w-[440px] h-[440px] -mt-6">
+            <div className="absolute inset-0">
               <img
                 src="login.png"
                 alt="Character"
-                className="w-full h-full object-cover bg-white"
+                className="w-full h-full object-contain"
               />
             </div>
 
-            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[300px]">
+            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[340px]">
               <div
-                className="absolute top-0 left-1/2 -translate-x-1/2 w-[220px] h-12"
+                className="absolute top-0 left-1/2 -translate-x-1/2 w-[260px] h-12"
                 style={{
                   background:
                     "radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 70%)",
                 }}
               />
               <div
-                className="absolute top-2 left-1/2 -translate-x-1/2 w-[280px] h-16"
+                className="absolute top-2 left-1/2 -translate-x-1/2 w-[320px] h-16"
                 style={{
                   background:
                     "radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0) 80%)",
